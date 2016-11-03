@@ -1,0 +1,11 @@
+/* Type 3: ";" */
+#ifndef SEMICOLON_H
+#define SEMICOLON_H
+
+class Semicolon : public Connector {
+    public:
+       Semicolon(Base* current, int previous) : Connector(current, previous) {};
+       int execute();
+};
+
+#endif
