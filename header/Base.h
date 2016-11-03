@@ -7,8 +7,8 @@
 
 class Base {
     public:
-        Base() {};          //Note: backup is char argv[]
-        virtual int execute() = 0;  //To be determined in subclasses
+        Base() {}; 
+        virtual int execute() = 0;  //To be determined in subclasses (Pure virtual function)
 };
 
 #endif

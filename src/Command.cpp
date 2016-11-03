@@ -1,33 +1,25 @@
 #include "../header/Command.h"
-/*#include "../header/Connector.h"
-#include "../header/Command.h"
-#include "../header/Andand.h"
-#include "../header/Oror.h"
-#include "../header/Semicolon.h"*/
 
 #include <cstdlib>
 #include <cstdio>
 
-void Command::parse(string& exec) {
-    //FIXME
-}
-
 int Command::execute() {
-    pid_t parent = getpid();
+    //pid_t parent = getpid();
     pid_t pid = fork();
-    string exec;    //After parsing string, put executable here
     
+    //Calls perror() here, then exits out
     if (pid == -1)
     {
         perror("fork fail");
         exit(-1);
-        //call perror, then built-in exit()
     } 
+    //Waits for the child to finish processing
     else if (pid > 0)
     {
         int process;
         waitpid(pid, &process, 0);
     }
+    //Calls execvp() here
     else 
     {
         char** tokens;
@@ -37,8 +29,8 @@ int Command::execute() {
         
         execvp(tokens[0], tokens);
         
-        //execvp(exec, cmd) /* Arguments will be the executable and the (rest + executable) */
-        //If it reaches here, return -1;
-        return -1;
+        //It will only reach this point if execvp() fails. When it does, -1 will
+        //determine what to do next
     }
+    return -1;
 }

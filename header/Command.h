@@ -10,9 +10,14 @@ using namespace std;
 class Command : public Base {
     public:
        string command;
-       Command(string command) {this->command = command;}
-       int execute();   //Will call execvp()
-       void parse(string&); //necessary?
+       Command(string command) {
+            if(command.find("#", 0) == string::npos) {
+                this->command = command;
+            } else {
+                this->command = command.substr(0, command.find("#", 0));
+            }
+        }
+        int execute();   //This will call execvp()
 };
 
 #endif
