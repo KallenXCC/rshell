@@ -16,9 +16,8 @@ class Connector : public Base {
            this->previous = previous;
        }
        //This will call Command's execute();
-       int execute() {
-           return 0; //temporary
-       } 
+       int execute() = 0;
+       void set_prev(int status) { previous = status; };
 };
 
 #endif
