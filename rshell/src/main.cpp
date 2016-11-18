@@ -21,7 +21,8 @@ int main() {
 
     bool sharp = false;    
 
-    //Parse genji after getting execvpharah to work
+    cout << "Parsing commands: " << endl;
+    
     for (unsigned i = 0; i < input.size(); ++i) {
         if (input.at(i) == '#') {
             Command* comm = new Command(input.substr(prevIndex, i - prevIndex));
@@ -59,6 +60,7 @@ int main() {
             }
         }
         if (input.at(i) == ']') {
+            cout << input.substr(input.find('[', prevIndex), i - input.find('[', prevIndex)) << endl;
             Command* comm = new Command(input.substr(input.find('[', prevIndex), i - input.find('[', prevIndex)));
             commands.push_back(comm);
             connectorTypes.push_back(']');
@@ -70,31 +72,40 @@ int main() {
         Command* last = new Command(input.substr(prevIndex, input.size() - prevIndex));
         commands.push_back(last);
     }
+    cout << endl;
     
     int prevResult = commands.at(0)->execute();
+    cout << endl;
+    cout << "Exit status: " << prevResult << endl;
     
-    for(unsigned i = 0; i < connectorTypes.size(); ++i) {
-        if(connectorTypes.at(i) == ';') {
-            Semicolon* semi = new Semicolon(commands.at(i + 1), prevResult);
+    unsigned i = 0;
+    while(i < connectorTypes.size()) {
+        ++i;
+        if(connectorTypes.at(i - 1) == ';') {
+            Semicolon* semi = new Semicolon(commands.at(i), prevResult);
             prevResult = semi->execute();
         }
-        else if(connectorTypes.at(i) == '&') {
-            Andand* amper = new Andand(commands.at(i + 1), prevResult);
+        else if(connectorTypes.at(i - 1) == '&') {
+            Andand* amper = new Andand(commands.at(i), prevResult);
             prevResult = amper->execute();
         }
-        else if(connectorTypes.at(i) == '|') {
-            Oror* bar = new Oror(commands.at(i + 1), prevResult);
+        else if(connectorTypes.at(i - 1) == '|') {
+            Oror* bar = new Oror(commands.at(i), prevResult);
             prevResult = bar->execute();
         }
+        cout << endl;
+        cout << "Exit status: " << prevResult << endl;
     }
 
-    //zarya blackhole + pharah barrage = potg champ [Q ftw}]
+    cout << "Command list:" << endl;
     for(unsigned i = 0; i < commands.size(); ++i) {
         //cout << commands.at(i)->command[0] << endl;
         for(unsigned j = 0; j < commands.at(i)->size; ++j) {
             printf ("%s \n", commands.at(i)->command[j]);
         }
     }
+    cout << endl;
+    cout << "Connector Type list:" << endl; 
     for(unsigned i = 0; i < connectorTypes.size(); ++i) {
         cout << connectorTypes.at(i) << endl;
     }
