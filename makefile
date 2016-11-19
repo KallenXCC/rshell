@@ -5,7 +5,8 @@ EXEC=test.out
 SOURCES=src/main.cpp src/Andand.cpp src/Command.cpp src/Oror.cpp src/Semicolon.cpp src/Flag.cpp src/Regular.cpp src/Directory.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 
-all: $(SOURCES) $(EXEC)
+all:
+	$(SOURCES) $(EXEC)
     
 $(EXEC): $(OBJECTS) 
 	$(CC) $(OBJECTS) -o $(EXEC)
