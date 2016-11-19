@@ -6,6 +6,11 @@ programming language: Shell Script. A list of known bugs will periodically be
 added to this file as the development proceeds. 
 
 //PROGRAM BUGS
+0) !! MAKEFILE is inconsistent, if it doesnt work use compiling something along the lines of:
+g++ -g -c -Wall -Werror -ansi -pedantic src/main.cpp -o src/main.o
+g++ -g -c -Wall -Werror -ansi -pedantic src/Command.cpp -o src/Command.o
+g++ src/main.o src/Andand.o src/Command.o src/Oror.o src/Semicolon.o src/Flag.o src/Regular.o src/Directory.o -o test.out
+
 1) Minor compilation issues in relation to classes and its inheritance
 [FIXED ON 10/31/2016]
 
