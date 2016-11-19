@@ -7,7 +7,7 @@
 
 class Base {
     public:
-        Base() {}; 
+        Base() {};
         virtual int execute() = 0;  //To be determined in subclasses (Pure virtual function)
 };
 
