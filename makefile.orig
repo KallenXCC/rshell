@@ -1,5 +1,9 @@
 CC = g++
+<<<<<<< HEAD
 CFLAGS = -g -Wall -Werror -ansi -pedantic -I.
+=======
+CFLAGS = -Wall -Werror -ansi -pedantic -I.
+>>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276
 LFLAGS = -Wall -Werror -I. -lm -o
 SRCDIR = src
 HEADIR = header
@@ -28,4 +32,9 @@ clean:
 #mv *.o obj
 #g++ -Wall -Werror -I. -lm obj/*.o -o test.out
 #mkdir bin
+<<<<<<< HEAD
 #mv test.out bin
+=======
+#mv test.out bin
+
+>>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276

@@ -4,14 +4,19 @@
 //FILE NOT CHANGED SINCE ASSIGNMENT 3
 //FILE NOT CHANGED SINCE ASSIGNMENT 3
 
-#ifndef REGULAR_H
-#define REGULAR_H
+#ifndef DIRECTORY_H
+#define DIRECTORY_H
 
 #include "Flag.h"
 
-class Regular : public Flag {
+class Directory : public Flag {
     public:
-        Regular(string current) : Flag(current) { }
+        Directory(string current) : Flag(current) { }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276
         int execute();
         int check(string);
 };

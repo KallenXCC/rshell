@@ -19,6 +19,7 @@ using namespace std;
 #include "../header/Flag.h"
 
 int main() {
+<<<<<<< HEAD
     vector<Base*> commands;         //Vector to hold the commands
     vector<char> connectorTypes;    //Vector to hold the connectors
     stack<const char*> history;     //Stack to hold the history of cd inputs
@@ -46,9 +47,11 @@ int main() {
 
     string input;
     cout << "$ ";
+>>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276
     getline(cin, input);
     prevIndex = 0;
 
+<<<<<<< HEAD
     sharp = false;
     goHome = false;
     dash = false;
@@ -59,6 +62,9 @@ int main() {
     cout << "Parsing commands: " << endl;
     
     //Loop to check the input for connectors and other indicators
+=======
+    unsigned int PWD = 0;
+    unsigned int OLDPWD = 0;
 
     bool sharp = false;    
     bool goHome = true;
@@ -66,6 +72,7 @@ int main() {
     bool slash = false;
     cout << "Parsing commands: " << endl;
     
+>>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276
     for (unsigned i = 0; i < input.size(); ++i) {
         
         //Is it a commented-out command?
@@ -119,9 +126,11 @@ int main() {
             connectorTypes.push_back(']');
             prevIndex = i + 1;
         }
-   
+<<<<<<< HEAD
+        
         //Same as above [the alternative way]
-
+=======
+>>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276
         if (input.at(i) == 't') {
             if((i + 3) < input.size()) {
                 if((input.at(i + 1) == 'e') && (input.at(i + 2) == 's') && (input.at(i + 3) == 't')){
@@ -185,7 +194,128 @@ int main() {
                 }
             }
         }
- 
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+        // Dan's contribution    :D
+        if (input.at(0) == 'c' && input.at(1) == 'd') {
+            for (unsigned d = 3; d < input.size(); ++d) {
+                //Do they want to go back to the previous directory?
+                if (input.at(d) == '-') {
+                    goHome = false;
+                    dash = true;
+                }
+                //Did they want to go to a new directory/path?
+                else if (input.at(d) == '/') {
+                    goHome = false;
+                    slash = true;
+                }
+            }
+            //User only put "cd", meaning to go back home
+            if (goHome) {
+                //Set OLDPWD to PWD
+                //PWD = $HOME; //Set PWD to Home
+                
+                int dir = chdir(getenv("HOME"));
+                if (dir == -1) {
+                    perror("chdir");
+                }
+                else {
+                    //Gets the home environment
+                    char* env = getenv("HOME");
+                    if (env == NULL) {
+                        perror("getenv");
+                    }
+                    // else {
+                        //Sets the environment to HOME
+                        int set = setenv("HOME", env, 0);
+                        if (set == -1) {
+                            perror("setenv");
+                        }
+                        else {
+                            if (PWD == history.size() - 1) {
+                                history.push_back(env);
+                                OLDPWD = PWD;
+                                ++PWD;
+                            }
+                            //If not, then that means we're somewhere in the middle
+                            else {
+                                history.at(PWD + 1) = env;
+                                OLDPWD = PWD;
+                                ++PWD;
+                            }
+                        }
+                    // }
+                }
+            }
+            //User put "cd -", meaning to go back to the previous environment
+            else if (dash) {
+                //Set a temp to OLDPWD
+                //Set OLDPWD to PWD
+                //Set PWD to temp
+                
+                //Is it empty? If not, then continue
+                if (history.size() > 0) {
+                    const char* temp = history.at(OLDPWD);
+                    history.at(OLDPWD) = history.at(PWD);
+                    history.at(PWD) = temp;
+                }
+            }
+            //User put cd <PATH>, meaning go to the path specified by the input
+            else if (slash) {
+                //Set OLDPWD to PWD
+                //PWD = <PATH>; //Set PWD to PATH
+                
+                string path;
+                // int temp = i + 2;
+                path = input.substr(input.find(' '));
+                // path = input.substr(' ', temp);
+                int dir = chdir(path.c_str());
+                if (dir == -1) {
+                    perror("chdir");
+                }
+                else {
+                    //Gets the home environment
+                    char* env = getenv(path.c_str());
+                    if (env == NULL) {
+                        perror("getenv");
+                    }
+                    else {
+                        //Sets the environment to HOME
+                        int set = setenv(path.c_str(), env, 0);
+                        if (set == -1) {
+                            perror("setenv");
+                        }
+                        //Is the current path not starting from the beginning? (In other words, did the user access previous directories before?)
+                        if (history.size() > 0) {
+                            //Are we at the end of history? If so, then push_back
+                            if (PWD == history.size() - 1) {
+                                history.push_back(path.c_str());
+                                OLDPWD = PWD;
+                                ++PWD;
+                            }
+                            //If not, then that means we're somewhere in the middle
+                            else {
+                                history.at(PWD + 1) = path.c_str();
+                                OLDPWD = PWD;
+                                ++PWD;
+                            }
+                        }
+                        //If here, then that means this is the first directory
+                        else {
+                            history.push_back(path.c_str());
+                            PWD = 0;
+                            OLDPWD = 0;
+                        }
+                    }
+                }
+            }
+        }
+        //Dan's contribution    :D
+>>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276
+    }
+    
     //==========================================================================
     //BEGIN CORE OF ASSIGNMENT 4
     //==========================================================================

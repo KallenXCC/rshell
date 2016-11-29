@@ -12,6 +12,11 @@
 class Regular : public Flag {
     public:
         Regular(string current) : Flag(current) { }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276
         int execute();
         int check(string);
 };
