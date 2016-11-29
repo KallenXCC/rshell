@@ -3,10 +3,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string>
-<<<<<<< HEAD
 #include <stack>
-=======
->>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276
 using namespace std;
 
 #include "../header/Command.h"
@@ -39,10 +36,6 @@ int main() {
     
     //Used to output current working directory
     cout << getenv("PWD") << " $ ";
-=======
-    vector<Base*> commands;
-    vector<char> connectorTypes;
-    vector<const char*> history;
 
     string input;
     cout << "$ ";
@@ -333,7 +326,6 @@ int main() {
     }
     cout << endl;
     
-<<<<<<< HEAD
     int prevResult;
     
     //Was it not one of the three?
@@ -346,12 +338,6 @@ int main() {
     }
     
     //Loop takes it's commands along with the connectors and runs execute()
-=======
-    int prevResult = commands.at(0)->execute();
-    cout << endl;
-    cout << "Exit status: " << prevResult << endl;
-    
->>>>>>> f5fbea08676d1522cec661d8f67ea492486fb276
     unsigned i = 0;
     while(i < connectorTypes.size()) {
         ++i;
