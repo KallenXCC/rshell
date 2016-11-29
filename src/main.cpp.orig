@@ -1,8 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <stdio.h>
+<<<<<<< HEAD
 #include <unistd.h>
 #include <string>
+=======
+>>>>>>> refs/remotes/origin/master
 using namespace std;
 
 #include "../header/Command.h"
@@ -17,13 +20,15 @@ using namespace std;
 int main() {
     vector<Base*> commands;
     vector<char> connectorTypes;
+<<<<<<< HEAD
     vector<const char*> history;
-
+=======
+>>>>>>> refs/remotes/origin/master
     string input;
     cout << "$ ";
     getline(cin, input);
     int prevIndex = 0;
-
+<<<<<<< HEAD
     unsigned int PWD = 0;
     unsigned int OLDPWD = 0;
 
@@ -31,6 +36,11 @@ int main() {
     bool goHome = true;
     bool dash = false;
     bool slash = false;
+=======
+
+    bool sharp = false;    
+>>>>>>> refs/remotes/origin/master
+
     cout << "Parsing commands: " << endl;
     
     for (unsigned i = 0; i < input.size(); ++i) {
@@ -255,6 +265,8 @@ int main() {
             }
         }
         //Dan's contribution    :D
+=======
+>>>>>>> refs/remotes/origin/master
     }
     if(!sharp) {
         cout << input.substr(prevIndex, input.size() - prevIndex) << endl;

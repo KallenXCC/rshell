@@ -5,9 +5,11 @@
 
 class Regular : public Flag {
     public:
+<<<<<<< HEAD
         Regular(string current) : Flag(current) { }
-
-
+=======
+        Regular(Base* current) : Flag(current) { }
+>>>>>>> refs/remotes/origin/master
         int execute();
         int check(string);
 };

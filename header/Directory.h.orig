@@ -5,9 +5,11 @@
 
 class Directory : public Flag {
     public:
+<<<<<<< HEAD
         Directory(string current) : Flag(current) { }
-
-
+=======
+        Directory(Base* current) : Flag(current) { }
+>>>>>>> refs/remotes/origin/master
         int execute();
         int check(string);
 };
