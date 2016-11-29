@@ -14,3 +14,15 @@ added to this file as the development proceeds.
 
 3) execvp() system call was not running
 [FIXED ON 11/1/2016]
+
+4) Getting many segfaults just from execvp()
+[FIXED ON 11/7/2016]
+
+5) makefile syntax could not be figured out
+[FIXED ON 11/28/2016]
+
+6) "cd" command not working
+[FIXED ON 11/29/2016]
+
+7) "cd -" after performing "cd" does not bring us back to home environment
+[FIXED ON 11/29/2016]

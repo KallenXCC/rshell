@@ -1,41 +1,31 @@
-CC=g++
-CFLAGS=-Wall -Werror -ansi -pedantic
-#INCLUDE=-I./header
-EXEC=test.out
-SOURCES=src/main.cpp src/Andand.cpp src/Command.cpp src/Oror.cpp src/Semicolon.cpp src/Flag.cpp src/Regular.cpp src/Directory.cpp
-OBJECTS=$(SOURCES:.cpp=.o)
+CC = g++
+CFLAGS = -g -Wall -Werror -ansi -pedantic -I.
+LFLAGS = -Wall -Werror -I. -lm -o
+SRCDIR = src
+HEADIR = header
+OBJDIR = obj
+BINDIR = bin
+EXEC = test.out
 
-all: $(SOURCES) $(EXEC)
-    
-$(EXEC): $(OBJECTS) 
-	$(CC) $(OBJECTS) -o $(EXEC)
+SOURCES := $(wildcard $(SRCDIR)/*.cpp)
+INCLUDES := $(wildcard $(HEADIR)/*.h)
+OBJECTS := $(SOURCES:$(SRCDIR)/%.cpp=$(OBJDIR)/%.o)
 
-%.o: %.cpp
-	$(CC) -g -c $(CFLAGS) $< -o $@
-	
-clean: 
-	rm -f $(EXEC) $
+all: $(SOURCES) $(EXEC) move
 
-##############################	
-# http://www.cplusplus.com/forum/general/54342/
-##############################
+$(EXEC): $(OBJECTS)
+	@$(CC) $(OBJECTS) $(LFLAGS) $(EXEC)
 
-#CXX = g++
-#CXXFLAGS = -Wall -Werror -ansi -pedantic
-#INCLUDE = -I./src
+$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-#Link command:
-#src: main.o ./src/main.o
-#	$(CXX) $(CXXFLAGS) $(INCLUDE) main.o ./src/main.o -o src
+move:
+	mkdir bin && mv test.out bin
+clean:
+	rm -f -r $(OBJECTS) bin
 
-#Compilation commands:
-#main.o: main.cpp
-#	$(CXX) $(CXXFLAGS) $(INCLUDE) -c main.cpp -o main.o
-
-#./src/main.o: ./src/main.cpp
-#	$(CXX) $(CXXFLAGS) $(INCLUDE) -c ./src/main.cpp -o ./src/main.o
-
-
-#make clean
-#clean:
-#	rm	-f	*.o
+#g++ -c -Wall -Werror -ansi -pedantic -I. src/*.cpp
+#mv *.o obj
+#g++ -Wall -Werror -I. -lm obj/*.o -o test.out
+#mkdir bin
+#mv test.out bin

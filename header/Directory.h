@@ -1,3 +1,9 @@
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+
 #ifndef DIRECTORY_H
 #define DIRECTORY_H
 
@@ -5,7 +11,7 @@
 
 class Directory : public Flag {
     public:
-        Directory(Base* current) : Flag(current) { }
+        Directory(string current) : Flag(current) { }
         int execute();
         int check(string);
 };

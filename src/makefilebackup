@@ -13,4 +13,4 @@ $(EXEC): $(OBJECTS)
 	$(CC) -g -c $(CFLAGS) $< -o $@
 	
 clean: 
-	rm -f $(EXEC) $(OBJECTS)
+	rm -f $(OBJECTS)

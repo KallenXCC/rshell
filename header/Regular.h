@@ -1,3 +1,9 @@
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+//FILE NOT CHANGED SINCE ASSIGNMENT 3
+
 #ifndef REGULAR_H
 #define REGULAR_H
 
@@ -5,7 +11,7 @@
 
 class Regular : public Flag {
     public:
-        Regular(Base* current) : Flag(current) { }
+        Regular(string current) : Flag(current) { }
         int execute();
         int check(string);
 };
