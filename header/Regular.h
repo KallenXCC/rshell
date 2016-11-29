@@ -5,7 +5,7 @@
 
 class Regular : public Flag {
     public:
-        Regular(Base* current) : Flag(current) { }
+        Regular(string current) : Flag(current) { }
         int execute();
         int check(string);
 };

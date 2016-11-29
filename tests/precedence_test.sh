@@ -1,0 +1,30 @@
+#!/bin/sh
+#TEST 1
+(ls -a && ls -l) && ECHO Outputted all
+
+#TEST 2
+(ECHO 1 || ECHO 2) && (ECHO 3 || ECHO 4) && (ECHO 5 || ECHO 6) && (ECHO 7 || ECHO 8) && (ECHO 9 || ECHO 10)
+
+#TEST 3
+ECHO I AM THE  && (ECHO FIRST ARGUMENT || ECHO SECOND ARGUMENT)
+
+#TEST 4
+(ECHO THIS TEST HAS) && ECHO PASSED || ECHO FAILED
+
+#TEST 5
+(((((((ls -a)))))))
+
+#TEST 6
+()
+
+#TEST 7
+(((ECHO A ; ((ECHO B) && ECHO C) || ECHO D))) ; ECHO E) && ECHO I MADE IT OUT
+
+#TEST 8
+(ECHO) (WORKED)
+
+#TEST 9
+(ECHO DATE: && date) || (ECHO TIME: && time) ; ECHO DONE
+
+#TEST 10
+(((ECHO FIRST) || (ECHO SECOND && ECHO THIRD) ; (ECHO FOURTH ; ECHO FIFTH)) && ECHO SIXTH || ECHO SEVENTH)

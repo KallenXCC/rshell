@@ -5,7 +5,7 @@
 
 class Directory : public Flag {
     public:
-        Directory(Base* current) : Flag(current) { }
+        Directory(string current) : Flag(current) { }
         int execute();
         int check(string);
 };
