@@ -36,9 +36,6 @@ int main() {
     
     //Used to output current working directory
     cout << getenv("PWD") << " $ ";
-
-    string input;
-    cout << "$ ";
     getline(cin, input);
     prevIndex = 0;
 
@@ -52,13 +49,6 @@ int main() {
     cout << "Parsing commands: " << endl;
     
     //Loop to check the input for connectors and other indicators
-
-    bool sharp = false;    
-    bool goHome = true;
-    bool dash = false;
-    bool slash = false;
-    cout << "Parsing commands: " << endl;
-    
     for (unsigned i = 0; i < input.size(); ++i) {
         
         //Is it a commented-out command?
@@ -112,9 +102,8 @@ int main() {
             connectorTypes.push_back(']');
             prevIndex = i + 1;
         }
-   
+        
         //Same as above [the alternative way]
-
         if (input.at(i) == 't') {
             if((i + 3) < input.size()) {
                 if((input.at(i + 1) == 'e') && (input.at(i + 2) == 's') && (input.at(i + 3) == 't')){
@@ -178,12 +167,14 @@ int main() {
                 }
             }
         }
- 
+
+    }
+    
     //==========================================================================
     //BEGIN CORE OF ASSIGNMENT 4
     //==========================================================================
     
-    //Is cd the only command inputted
+    //Is cd the only command inputted?
     if (input.at(0) == 'c' && input.at(1) == 'd') {
         for (unsigned d = 3; d < input.size(); ++d) {
             //Do they want to go back to the previous directory?
@@ -227,7 +218,6 @@ int main() {
                     perror("setenv");
                 }
             }
-            //cout << "AFTER RUNNING: " << getenv("PWD") << endl;
         }
         //User put "cd -", meaning to go back to the previous environment
         else if (dash) {
@@ -241,7 +231,6 @@ int main() {
             }
             //Is it empty? If not, then continue
             if (history.size() > 0) {
-                //cout << "Previous environment: " << history.top() << endl;
                 int dir = chdir(history.top());
                 if (dir == -1) {
                     perror("chdir");
@@ -257,7 +246,7 @@ int main() {
             history.push(oldEnv);
         }
         //User put cd <PATH>, meaning go to the path specified by the input
-        else if (slash) { //SUSPECT
+        else if (slash) {
             char* oldEnv = getenv("PWD");
             if (oldEnv == NULL) {
                 perror("getenv");
@@ -266,51 +255,37 @@ int main() {
             if (setOldEnv == -1) {
                 perror("setenv");
             }
+            history.push(oldEnv);
             
-            //PWD = <PATH>; //Set PWD to PATH
-            
+            //Next block of code is used to output current working directory
             string path;
-            // int temp = i + 2;
             path = input.substr(input.find(' ') + 1);
-            // path = input.substr(' ', temp);
             int dir = chdir(path.c_str());
             if (dir == -1) {
                 perror("chdir");
             }
-            else { //SUSPECT
-                //Gets the home environment
-                char* env = getenv(path.c_str());
-                if (env == NULL) {
-                    perror("getenv");
+            else {
+                string properPath;
+                string oldPath(getenv("OLDPWD"));
+                if(path.find(oldPath) != string::npos) { //check what case of path
+                    path = path.substr(path.find(oldPath) + oldPath.size() + 1);
+                    properPath.append(oldPath);
+                    properPath.append("/");
+                } else if (oldPath.find(path) != string::npos) {
+                    //do nothing
                 } else {
-                    //Sets the environment to HOME
-                    int set = setenv(path.c_str(), env, 0);
-                    if (set == -1) {
-                        perror("setenv");
-                    }
-                    //Is the current path not starting from the beginning? (In other words, did the user access previous directories before?)
-                    // if (history.size() > 0) {
-                    //     //Are we at the end of history? If so, then push_back
-                    //     if (PWD == history.size() - 1) {
-                    //         history.push_back(path.c_str());
-                    //         OLDPWD = PWD;
-                    //         ++PWD;
-                    //     }
-                    //     //If not, then that means we're somewhere in the middle
-                    //     else {
-                    //         history.at(PWD + 1) = path.c_str();
-                    //         OLDPWD = PWD;
-                    //         ++PWD;
-                    //     }
-                    // }
-                    // //If here, then that means this is the first directory
-                    // else {
-                    //     history.push_back(path.c_str());
-                    //     PWD = 0;
-                    //     OLDPWD = 0;
-                    // }
+                    properPath.append(oldPath);
+                    properPath.append("/");
                 }
+                properPath.append(path);
+                int set = setenv("PWD", properPath.c_str(), 1);
+                if (set == -1) {
+                    perror("setenv");
+                }
+            
             }
+        } else {
+            cout << "ERROR: improper cd argument" << endl;
         }
     }
         
@@ -369,7 +344,6 @@ int main() {
     for(unsigned i = 0; i < connectorTypes.size(); ++i) {
         cout << connectorTypes.at(i) << endl;
     }*/
-    
     } while(true);
     return 0;
 }
