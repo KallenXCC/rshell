@@ -5,7 +5,7 @@ SRCDIR = src
 HEADIR = header
 OBJDIR = obj
 BINDIR = bin
-EXEC = test.out
+EXEC = rshell
 
 SOURCES := $(wildcard $(SRCDIR)/*.cpp)
 INCLUDES := $(wildcard $(HEADIR)/*.h)
@@ -20,7 +20,7 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 move:
-	mkdir bin && mv test.out bin
+	mkdir bin && mv $(EXEC) bin
 clean:
 	rm -f -r $(OBJECTS) bin
 
